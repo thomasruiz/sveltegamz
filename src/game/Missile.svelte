@@ -1,14 +1,10 @@
+<script context="module">
+export const MISSILE_SIZE = 10;
+</script>
+
 <script>
 export let position;
 export let direction;
-
-function loop() {
-    position.x += direction.x / 10;
-    position.y += direction.y / 10;
-    requestAnimationFrame(loop);
-}
-
-requestAnimationFrame(loop);
 </script>
 
 <style>

@@ -4,15 +4,17 @@ import { createEventDispatcher } from 'svelte';
 const dispatch = createEventDispatcher();
 const width = window.innerWidth / 2;
 
+export let rotation = 0;
 let rotate = 0;
-let rotation = 0;
 
 function handleKeyDown(event) {
     switch (event.key) {
         case 'ArrowLeft':
+            dispatch('move', -1)
             rotate = -1;
             break;
         case 'ArrowRight':
+            dispatch('move', 1)
             rotate = 1;
             break;
     }
@@ -22,11 +24,13 @@ function handleKeyUp(event) {
     switch (event.key) {
         case 'ArrowLeft':
             if (rotate === -1) {
+                dispatch('move', 0)
                 rotate = 0;
             }
             break;
         case 'ArrowRight':
             if (rotate === 1) {
+                dispatch('move', 0)
                 rotate = 0;
             }
             break;
@@ -48,14 +52,6 @@ function fire() {
         }
     });
 }
-
-function loop() {
-    rotation += rotate * 1.15;
-    rotation = Math.max(-75, Math.min(75, rotation));
-    requestAnimationFrame(loop);
-}
- 
-requestAnimationFrame(loop);
 </script>
 
 <style>
